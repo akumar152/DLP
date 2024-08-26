@@ -47,7 +47,7 @@ const Heatmap = () => (
             data={data}
             keys={['Critical', 'Pending', 'In-Progress', 'Not Started']}
             indexBy="id"
-            margin={{ top: 60, right: 40, bottom: 80, left: 100 }}
+            margin={{ top: 40, right: 40, bottom: 80, left: 80 }}
             colors={{ type: 'sequential', scheme: 'blues' }}
             axisTop={{
                 orient: 'top',
