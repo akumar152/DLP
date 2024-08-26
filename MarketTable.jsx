@@ -34,28 +34,20 @@ const MarketTable = () => {
 
     return (
         <div style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '10px' }}>
-            <table border="1" style={{ width: '100%', height: 'auto', textAlign: 'center', borderCollapse: 'collapse', fontSize: '0.9em' }}>
+            <table border="1" style={{ width: '100%', height: 'auto', textAlign: 'center', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
                 <thead>
                     <tr>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Market</th>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Bronze</th>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Bronze (Target)</th>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Silver</th>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Silver (Target)</th>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Gold</th>
-                        <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Gold (Target)</th>
+                        {['Market', 'Bronze', 'Bronze (Target)', 'Silver', 'Silver (Target)', 'Gold', 'Gold (Target)'].map((header, index) => (
+                            <th key={index} style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>
+                                {header}
+                            </th>
+                        ))}
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((row, index) => (
                         <tr key={index}>
-                            <td
-                                style={{
-                                    backgroundColor: index % 2 === 0 ? 'lightpink' : 'pink',
-                                    color: 'black',
-                                    padding: '5px'
-                                }}
-                            >
+                            <td style={{ backgroundColor: index % 2 === 0 ? 'lightpink' : 'pink', color: 'black', padding: '5px' }}>
                                 {row.market}
                             </td>
                             <td
@@ -94,7 +86,7 @@ const MarketTable = () => {
             </table>
 
             {/* Horizontal Color Legend */}
-            <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', fontSize: '0.8em' }}>
+            <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', fontSize: '0.8rem' }}>
                 {Object.keys(value).map((key) => (
                     <div
                         key={key}
@@ -130,7 +122,7 @@ const MarketTable = () => {
                         borderRadius: '5px',
                         zIndex: 1000,
                         pointerEvents: 'none',
-                        fontSize: '0.9em',
+                        fontSize: '0.9rem',
                         maxWidth: '150px',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
