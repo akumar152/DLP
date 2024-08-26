@@ -1,0 +1,31 @@
+/* LineGraph.css */
+
+.tooltip {
+    font-size: 12px;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    padding: 8px;
+    background: lightgray;
+    border: 1px solid gray;
+    border-radius: 4px;
+    color: #333;
+    /* Text color */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    /* Optional: add a subtle shadow */
+    visibility: hidden;
+    /* Initially hidden */
+    z-index: 10;
+    /* Ensure tooltip is above other elements */
+}
+
+.line-graph-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.tooltip {
+    pointer-events: none;
+}

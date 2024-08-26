@@ -1,0 +1,17 @@
+.country {
+    fill: #ccc;
+    /* Default country color */
+    stroke: #fff;
+    stroke-width: 0.5px;
+}
+
+.country.highlighted {
+    fill: #00ff00;
+    /* Green color for highlighting */
+}
+
+.boundary {
+    fill: none;
+    stroke: #333;
+    stroke-width: 0.5px;
+}

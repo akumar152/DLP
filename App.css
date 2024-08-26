@@ -1,0 +1,97 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 1em;
+}
+
+.App-container {
+  display: flex;
+  flex: 1;
+}
+
+.App-sidebar {
+  width: 150px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.App-sidebar ul li {
+  margin: 10px 0;
+}
+
+.App-sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.App-sidebar ul li a i {
+  margin-right: 10px;
+  /* Space between icon and text */
+  font-size: 20px;
+  /* Adjust icon size */
+}
+
+.App-sidebar ul li a:hover {
+  color: #007bff;
+}
+
+.App-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

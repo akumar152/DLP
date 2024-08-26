@@ -1,0 +1,56 @@
+/* src/Dashboard.css */
+
+.dashboard-container {
+    display: flex;
+    flex-direction: row;
+    height: 150vh;
+    /* Full viewport height */
+    width: 90vw;
+    /* Full viewport width */
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.section {
+    flex: 1;
+    height: 33%;
+    /* 1/3rd of the viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.map-section {
+    background: lightgray;
+    /* Example background color for map section */
+}
+
+.graph-section {
+    background: #e0e0e0;
+    /* Example background color for graph section */
+}
+
+.graph-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #333;
+}
+
+/* Optional: Adjust styling for responsiveness */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .section {
+        height: 50%;
+        /* Adjust height on smaller screens if needed */
+    }
+}
