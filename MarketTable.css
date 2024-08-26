@@ -13,7 +13,7 @@
     height: 100%;
     max-height: calc(100% - 40px); /* Adjust based on padding and potential headers */
     border-collapse: collapse;
-    font-size: 0.9rem; /* Base font size */
+    font-size: calc(0.9rem + 0.1vw); /* Responsive base font size */
     overflow: auto; /* Allow scrolling if content exceeds bounds */
     table-layout: fixed; /* Fixed layout for table */
 }
@@ -22,7 +22,7 @@
     background-color: pink;
     color: black;
     padding: 0.5em; /* Use relative units */
-    font-size: 1rem; /* Font size for headers */
+    font-size: calc(1rem + 0.1vw); /* Responsive font size for headers */
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis; /* Ensure text does not overflow */
@@ -35,7 +35,7 @@
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Prevent overflow */
     text-overflow: ellipsis; /* Add ellipsis for overflow text */
-    font-size: 0.9rem; /* Base font size for cells */
+    font-size: calc(0.9rem + 0.1vw); /* Responsive font size for cells */
 }
 
 .market-table-cell-market {
@@ -51,7 +51,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    font-size: 0.8rem; /* Font size for legend */
+    font-size: calc(0.8rem + 0.05vw); /* Responsive font size for legend */
 }
 
 .market-table-legend-item {
@@ -76,7 +76,7 @@
     border-radius: 5px;
     z-index: 1000;
     pointer-events: none;
-    font-size: 0.8rem; /* Font size for tooltips */
+    font-size: calc(0.8rem + 0.1vw); /* Responsive font size for tooltips */
     max-width: 150px;
     white-space: nowrap;
     overflow: hidden;
@@ -91,11 +91,11 @@
     .market-table-header,
     .market-table-cell {
         padding: 0.3em; /* Adjust padding for smaller screens */
-        font-size: 0.8rem; /* Reduce font size for smaller screens */
+        font-size: calc(0.8rem + 0.1vw); /* Adjust font size for smaller screens */
     }
 
     .market-table-legend {
-        font-size: 0.7rem; /* Reduce font size for legend */
+        font-size: calc(0.7rem + 0.05vw); /* Adjust font size for legend */
     }
 
     .legend-color-box {
@@ -104,7 +104,7 @@
     }
 
     .market-table-tooltip {
-        font-size: 0.7rem; /* Adjust font size for tooltips */
+        font-size: calc(0.7rem + 0.1vw); /* Adjust font size for tooltips */
         max-width: 120px; /* Adjust max-width for smaller screens */
     }
 }
