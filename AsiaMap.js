@@ -1,4 +1,3 @@
-// src/AsiaMap.js
 import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import asiaGeoJSON from './custom.geo.json'; // Replace with your GeoJSON path
@@ -24,14 +23,14 @@ const colors = {
     Malaysia: 'lightblue',
     Indonesia: 'lightgreen',
     Philippines: 'lightcoral',
-    'Hong Kong': 'lightgoldenrodyellow' // Use quotes for keys with spaces
+    'Hong Kong': 'lightgoldenrodyellow'
 };
 
 const AsiaMap = () => {
     const svgRef = useRef(null);
     const [modalContent, setModalContent] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
-    const [hoverInfo, setHoverInfo] = useState({ visible: false, content: 'Hello', position: { x: 0, y: 0 } });
+    const [hoverInfo, setHoverInfo] = useState({ visible: false, content: '', position: { x: 0, y: 0 } });
 
     useEffect(() => {
         const svg = d3.select(svgRef.current);
@@ -53,7 +52,7 @@ const AsiaMap = () => {
             .data(asiaGeoJSON.features)
             .enter().append('path')
             .attr('d', path)
-            .attr('fill', d => colors[d.properties.name] || '#ccc') // Set color based on country name
+            .attr('fill', d => colors[d.properties.name] || '#ccc')
             .attr('stroke', 'black')
             .attr('stroke-width', 0.5);
 
@@ -68,53 +67,49 @@ const AsiaMap = () => {
                 if (marketCategory) {
                     const centroid = path.centroid(d);
                     const g = d3.select(this)
-                        .attr('transform', `translate(${centroid[0]}, ${centroid[1] - 20})`); // Adjust tooltip base position
+                        .attr('transform', `translate(${centroid[0]}, ${centroid[1] - 20})`);
 
-                    // Add small circle at the base of the line
                     g.append('circle')
                         .attr('cx', 0)
-                        .attr('cy', 15) // Position circle below the tooltip
+                        .attr('cy', 15)
                         .attr('r', 3)
-                        .attr('fill', 'black') // Match the color with the tooltip
+                        .attr('fill', 'black')
                         .attr('stroke', 'black')
                         .attr('stroke-width', 1);
 
-                    // Add line pointing to the tooltip
                     g.append('line')
                         .attr('x1', 0)
-                        .attr('y1', 15) // Start line from the circle
+                        .attr('y1', 15)
                         .attr('x2', 0)
-                        .attr('y2', -15) // End line at the tooltip
-                        .attr('stroke', 'black') // Match the color with the tooltip
+                        .attr('y2', -15)
+                        .attr('stroke', 'black')
                         .attr('stroke-width', 1);
 
-                    // Add tooltip background
-                    const textWidth = countryName.length * 7; // Approximate width based on text length
+                    const textWidth = countryName.length * 7;
                     g.append('rect')
-                        .attr('x', -textWidth / 2 - 5) // Center the rectangle based on text width
-                        .attr('y', -20) // Position the top of the tooltip 10px above the position calculated by the centroid
-                        .attr('width', textWidth + 10) // Width based on text length with padding
+                        .attr('x', -textWidth / 2 - 5)
+                        .attr('y', -20)
+                        .attr('width', textWidth + 10)
                         .attr('height', 15)
                         .attr('rx', 10)
                         .attr('ry', 10)
-                        .attr('fill', marketColors[marketCategory]) // Use market color for background
+                        .attr('fill', marketColors[marketCategory])
                         .attr('stroke', 'red')
                         .attr('stroke-width', 1)
                         .style('cursor', 'pointer')
                         .on('click', () => {
                             setModalContent({
                                 countryName,
-                                numberOfIssues: Math.floor(Math.random() * 100), // Dummy data
-                                totalCost: (Math.random() * 10000).toFixed(2) // Dummy data
+                                numberOfIssues: Math.floor(Math.random() * 100),
+                                totalCost: (Math.random() * 10000).toFixed(2)
                             });
                             setModalOpen(true);
                         })
                         .on('mouseover', function (event) {
                             const [x, y] = d3.pointer(event);
-                            // Show additional tooltip on hover
                             setHoverInfo({
                                 visible: true,
-                                content: `Additional info for ${countryName}`, // Dummy info
+                                content: `Additional info for ${countryName}`,
                                 position: { x, y }
                             });
                         })
@@ -122,49 +117,46 @@ const AsiaMap = () => {
                             setHoverInfo({ visible: false, content: '', position: { x: 0, y: 0 } });
                         });
 
-                    // Add text inside the tooltip
                     g.append('text')
                         .attr('class', 'tooltip-text')
                         .attr('x', 0)
-                        .attr('y', -12) // Adjust y position for text inside tooltip
-                        .attr('text-anchor', 'middle') // Center the text horizontally
+                        .attr('y', -12)
+                        .attr('text-anchor', 'middle')
                         .text(countryName);
                 }
             });
 
     }, []);
 
-    // Function to close the modal
     const closeModal = () => {
         setModalOpen(false);
         setModalContent(null);
     };
 
-    // Calculate text width for legend items
     const getLegendItemWidth = (text) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = '10px Arial'; // Font size
+        context.font = '10px Arial';
         return context.measureText(text).width;
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
             <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
-            <div className="legend" style={{ position: 'absolute', bottom: '30px', left: '30px'}}>
+            <div className="legend" style={{ position: 'absolute', bottom: '30px', left: '30px' }}>
                 {Object.keys(marketColors).map((market) => (
                     <div key={market} className="legend-item">
                         <div
                             className="legend-color-box"
                             style={{
                                 backgroundColor: marketColors[market],
-                                width: `${Math.max(getLegendItemWidth(market) + 10, 60)}px`, // Minimum box width
-                                height: '5px', // Height for legend box
+                                width: `${Math.max(getLegendItemWidth(market) + 10, 60)}px`,
+                                height: '5px',
                                 borderRadius: '10px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                padding: '5px',                               
+                                padding: '5px',
                             }}
                         >
                             <span className="legend-text" style={{ fontSize: '10px', color: 'white' }}>{market}</span>
