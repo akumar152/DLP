@@ -85,12 +85,12 @@ const AsiaMap = () => {
                         .attr('stroke', 'black')
                         .attr('stroke-width', 1);
 
-                    const textWidth = countryName.length * 7;
+                    const textWidth = getLegendItemWidth(countryName);
                     g.append('rect')
                         .attr('x', -textWidth / 2 - 5)
                         .attr('y', -20)
-                        .attr('width', textWidth + 10)
-                        .attr('height', 15)
+                        .attr('width', textWidth + 5)
+                        .attr('height', 15) // Adjusted for responsive text
                         .attr('rx', 10)
                         .attr('ry', 10)
                         .attr('fill', marketColors[marketCategory])
@@ -119,9 +119,10 @@ const AsiaMap = () => {
 
                     g.append('text')
                         .attr('class', 'tooltip-text')
-                        .attr('x', 0)
+                        .attr('x', 1)
                         .attr('y', -12)
                         .attr('text-anchor', 'middle')
+                        .style('font-size', '0.7vw') // Responsive font size
                         .text(countryName);
                 }
             });
@@ -133,24 +134,25 @@ const AsiaMap = () => {
         setModalContent(null);
     };
 
+    // Function to calculate the width of text for legend
     const getLegendItemWidth = (text) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = '10px Arial';
+        context.font = '1vw Arial'; // Adjust font size for responsiveness
         return context.measureText(text).width;
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
             <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
-            <div className="legend" style={{ position: 'absolute', bottom: '30px', left: '30px' }}>
+            <div className="legend">
                 {Object.keys(marketColors).map((market) => (
                     <div key={market} className="legend-item">
                         <div
                             className="legend-color-box"
                             style={{
                                 backgroundColor: marketColors[market],
-                                width: `${Math.max(getLegendItemWidth(market) + 10, 60)}px`,
+                                width: `${Math.max(getLegendItemWidth(market),50)}px`,
                                 height: '5px',
                                 borderRadius: '10px',
                                 display: 'flex',
@@ -159,7 +161,7 @@ const AsiaMap = () => {
                                 padding: '5px',
                             }}
                         >
-                            <span className="legend-text" style={{ fontSize: '10px', color: 'white' }}>{market}</span>
+                            <span className="legend-text">{market}</span>
                         </div>
                     </div>
                 ))}
@@ -178,15 +180,12 @@ const AsiaMap = () => {
                 <div
                     className="additional-tooltip"
                     style={{
-                        position: 'absolute',
-                        left: hoverInfo.position.x + 100,
-                        top: hoverInfo.position.y + 100,
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                        color: 'white',
-                        padding: '5px',
-                        borderRadius: '5px',
-                        pointerEvents: 'none',
-                        whiteSpace: 'nowrap'
+                        left: hoverInfo.position.x + 10,
+                        top: hoverInfo.position.y + 10,
+                        maxWidth: '150px', // Added maxWidth to fit within screen
+                        whiteSpace: 'nowrap', // Prevent text wrapping
+                        overflow: 'hidden', // Hide overflow text
+                        textOverflow: 'ellipsis', // Add ellipsis for overflow text
                     }}
                 >
                     {hoverInfo.content}
