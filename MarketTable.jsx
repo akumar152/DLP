@@ -33,7 +33,7 @@ const MarketTable = () => {
     };
 
     return (
-        <div style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '5px' }}>
+        <div style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '20px' }}>
             <table border="1" style={{ width: '100%', height: '80%', textAlign: 'center', borderCollapse: 'collapse', fontSize: '0.9em', marginTop: '10px' }}>
                 <thead>
                     <tr>
