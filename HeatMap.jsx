@@ -1,5 +1,6 @@
 import React from 'react';
 import { ResponsiveHeatMap } from '@nivo/heatmap';
+import './HeatMap.css'; // Import the CSS file for styling
 
 const data = [
     {
