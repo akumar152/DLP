@@ -55,6 +55,8 @@ const Heatmap = () => (
                 tickRotation: 0,
                 legend: '',
                 legendOffset: 36,
+                tickColor: '#333',
+                tickTextColor: '#333'
             }}
             axisRight={null}
             axisLeft={{
@@ -64,6 +66,8 @@ const Heatmap = () => (
                 tickRotation: 0,
                 legend: '',
                 legendOffset: -60,
+                tickColor: '#333',
+                tickTextColor: '#333'
             }}
             cellOpacity={1}
             cellBorderColor={{ from: 'color', modifiers: [['darker', 0.4]] }}
