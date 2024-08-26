@@ -29,7 +29,8 @@ path {
     background: rgb(23, 119, 184);
     border: 1px solid red;
     padding: 2px;
-    font-size: 12px;
+    font-size: 0.8vw;
+    /* Responsive font size */
     color: rgb(30, 148, 103);
     border-radius: 10px;
     display: none;
@@ -52,23 +53,23 @@ path {
     rx: 10;
     /* Border radius */
     ry: 10;
-    /* Border radius */
+    /* Adjust padding */
     padding: 5px;
 }
 
 /* Tooltip text styling */
 .tooltip-container text {
     fill: white;
-    font-size: 8px;
+    font-size: 0.6vw;
+    /* Responsive font size */
     text-anchor: middle;
     alignment-baseline: middle;
     pointer-events: none;
+    dy: -20px;
     /* Prevent text from capturing mouse events */
-    dy: -22px;
-    /* Adjust text positioning */
 }
 
-/* Tooltip container styling */
+/* Add padding to the tooltip text to avoid touching the borders */
 .tooltip-container {
     display: inline-block;
     /* Ensures the container adapts to the size of its content */
@@ -123,6 +124,8 @@ path {
 
 .legend-item {
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .legend-color-box {
@@ -132,17 +135,18 @@ path {
     padding: 2px;
     border-radius: 10px;
     color: white;
-    font-size: 10px;
+    font-size: 0.7vw;
+    /* Responsive font size */
     font-family: Arial, sans-serif;
     border: 1px solid black;
-    /* Add border with 1px width and black color */
+    /* Add border with 2px width and black color */
 }
 
 .legend-text {
     margin-left: 5px;
 }
 
-/* Styles for the additional tooltip */
+/* Additional tooltip styling */
 .additional-tooltip {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
@@ -153,6 +157,6 @@ path {
     /* Ensures the tooltip does not interfere with mouse events */
     white-space: nowrap;
     /* Prevents the text from wrapping */
-    font-size: 12px;
-    /* Adjust font size if needed */
+    font-size: 0.8vw;
+    /* Responsive font size */
 }
