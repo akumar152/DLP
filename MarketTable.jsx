@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './MarketTable.css'; // Import the CSS file
 
 const value = {
     'Not Started': 'lightgray',
@@ -33,12 +34,12 @@ const MarketTable = () => {
     };
 
     return (
-        <div style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '10px' }}>
-            <table border="1" style={{ width: '100%', height: 'auto', textAlign: 'center', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+        <div className="market-table-container">
+            <table className="market-table">
                 <thead>
                     <tr>
                         {['Market', 'Bronze', 'Bronze (Target)', 'Silver', 'Silver (Target)', 'Gold', 'Gold (Target)'].map((header, index) => (
-                            <th key={index} style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>
+                            <th key={index} className="market-table-header">
                                 {header}
                             </th>
                         ))}
@@ -47,36 +48,30 @@ const MarketTable = () => {
                 <tbody>
                     {data.map((row, index) => (
                         <tr key={index}>
-                            <td style={{ backgroundColor: index % 2 === 0 ? 'lightpink' : 'pink', color: 'black', padding: '5px' }}>
+                            <td className={`market-table-cell market-table-cell-market ${index % 2 === 0 ? 'even' : 'odd'}`}>
                                 {row.market}
                             </td>
-                            <td
-                                style={{ backgroundColor: value[row.bronze], padding: '5px' }}
+                            <td className="market-table-cell" style={{ backgroundColor: value[row.bronze] }}
                                 onMouseEnter={(e) => showTooltip(row.bronze, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td
-                                style={{ backgroundColor: value[row.bronzeTarget], padding: '5px' }}
+                            <td className="market-table-cell" style={{ backgroundColor: value[row.bronzeTarget] }}
                                 onMouseEnter={(e) => showTooltip(row.bronzeTarget, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td
-                                style={{ backgroundColor: value[row.silver], padding: '5px' }}
+                            <td className="market-table-cell" style={{ backgroundColor: value[row.silver] }}
                                 onMouseEnter={(e) => showTooltip(row.silver, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td
-                                style={{ backgroundColor: value[row.silverTarget], padding: '5px' }}
+                            <td className="market-table-cell" style={{ backgroundColor: value[row.silverTarget] }}
                                 onMouseEnter={(e) => showTooltip(row.silverTarget, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td
-                                style={{ backgroundColor: value[row.gold], padding: '5px' }}
+                            <td className="market-table-cell" style={{ backgroundColor: value[row.gold] }}
                                 onMouseEnter={(e) => showTooltip(row.gold, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td
-                                style={{ backgroundColor: value[row.goldTarget], padding: '5px' }}
+                            <td className="market-table-cell" style={{ backgroundColor: value[row.goldTarget] }}
                                 onMouseEnter={(e) => showTooltip(row.goldTarget, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
@@ -86,49 +81,17 @@ const MarketTable = () => {
             </table>
 
             {/* Horizontal Color Legend */}
-            <div style={{ marginTop: '10px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', fontSize: '0.8rem' }}>
+            <div className="market-table-legend">
                 {Object.keys(value).map((key) => (
-                    <div
-                        key={key}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            margin: '5px'
-                        }}
-                    >
-                        <div
-                            style={{
-                                width: '15px',
-                                height: '15px',
-                                backgroundColor: value[key],
-                                marginRight: '5px',
-                                border: '1px solid black'
-                            }}
-                        ></div>
+                    <div key={key} className="market-table-legend-item">
+                        <div className="legend-color-box" style={{ backgroundColor: value[key] }}></div>
                         <span>{key}</span>
                     </div>
                 ))}
             </div>
 
             {tooltip.visible && (
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: tooltip.y + 10,
-                        left: tooltip.x + 10,
-                        backgroundColor: 'white',
-                        border: '1px solid black',
-                        padding: '5px',
-                        borderRadius: '5px',
-                        zIndex: 1000,
-                        pointerEvents: 'none',
-                        fontSize: '0.9rem',
-                        maxWidth: '150px',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                    }}
-                >
+                <div className="market-table-tooltip" style={{ top: tooltip.y + 10, left: tooltip.x + 10 }}>
                     {tooltip.content}
                 </div>
             )}
