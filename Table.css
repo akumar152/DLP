@@ -1,0 +1,46 @@
+.table-container {
+    padding: 20px;
+    overflow-x: auto;
+    margin: 0;
+    /* Removed negative margins */
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* Ensures columns take equal width */
+}
+
+.header-row,
+.body-row {
+    background-color: #f4f4f4;
+}
+
+.header-cell,
+.body-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    .header-cell,
+    .body-cell {
+        padding: 4px;
+        /* Adjust padding for smaller screens */
+        font-size: 12px;
+        /* Adjust font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+
+    .header-cell,
+    .body-cell {
+        font-size: 10px;
+        /* Further reduce font size for very small screens */
+    }
+}
