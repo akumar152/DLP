@@ -4,7 +4,8 @@
     box-sizing: border-box;
     padding: 10px;
     position: relative;
-    /* To position the tooltip correctly */
+    overflow: auto;
+    /* Ensure content is scrollable if it overflows */
 }
 
 .market-table {
@@ -12,7 +13,9 @@
     height: auto;
     text-align: center;
     border-collapse: collapse;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    /* Enable horizontal scrolling if needed */
 }
 
 .market-table-header {
@@ -25,10 +28,10 @@
 
 .market-table-cell {
     padding: 5px;
+    white-space: nowrap;
 }
 
 .market-table-cell-market {
-    white-space: nowrap;
     background-color: lightpink;
 }
 
