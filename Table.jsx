@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
+import './Table.css'; // Import your CSS file
 
 // Generate dummy data with 20 rows and 10 columns
 const generateData = (numRows, numCols) => {
@@ -31,19 +32,13 @@ const Table = () => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
 
     return (
-        <div style={{
-            padding: '20px',
-            marginLeft: '-20px',
-            marginRight: '-100px',
-            maxWidth: 'calc(100%)', // Ensure the table does not exceed the container width
-            overflowX: 'auto',
-        }}>
-            <table {...getTableProps()} style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <div className="table-container">
+            <table {...getTableProps()} className="responsive-table">
                 <thead>
                     {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()} style={{ backgroundColor: '#f4f4f4' }}>
+                        <tr {...headerGroup.getHeaderGroupProps()} className="header-row">
                             {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()} style={{ border: '1px solid #ddd', padding: '8px' }}>
+                                <th {...column.getHeaderProps()} className="header-cell">
                                     {column.render('Header')}
                                 </th>
                             ))}
@@ -54,9 +49,9 @@ const Table = () => {
                     {rows.map(row => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()}>
+                            <tr {...row.getRowProps()} className="body-row">
                                 {row.cells.map(cell => (
-                                    <td {...cell.getCellProps()} style={{ border: '1px solid #ddd', padding: '8px' }}>
+                                    <td {...cell.getCellProps()} className="body-cell">
                                         {cell.render('Cell')}
                                     </td>
                                 ))}
