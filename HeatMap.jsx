@@ -1,44 +1,12 @@
 import React from 'react';
 import { ResponsiveHeatMap } from '@nivo/heatmap';
-import './HeatMap.css'; // Import the CSS file for styling
+import './HeatMap.css'; // Import the CSS file
 
 const data = [
-    {
-        id: "Malaysia",
-        data: [
-            { x: "Critical", y: 50 },
-            { x: "Pending", y: 80 },
-            { x: "In-Progress", y: 90 },
-            { x: "Not Started", y: 70 },
-        ]
-    },
-    {
-        id: "Indonesia",
-        data: [
-            { x: "Critical", y: 25 },
-            { x: "Pending", y: 80 },
-            { x: "In-Progress", y: 60 },
-            { x: "Not Started", y: 20 },
-        ]
-    },
-    {
-        id: "Hong Kong",
-        data: [
-            { x: "Critical", y: 30 },
-            { x: "Pending", y: 10 },
-            { x: "In-Progress", y: 50 },
-            { x: "Not Started", y: 45 },
-        ]
-    },
-    {
-        id: "Philippines",
-        data: [
-            { x: "Critical", y: 90 },
-            { x: "Pending", y: 80 },
-            { x: "In-Progress", y: 100 },
-            { x: "Not Started", y: 70 },
-        ]
-    },
+    { id: "Malaysia", data: [{ x: "Critical", y: 50 }, { x: "Pending", y: 80 }, { x: "In-Progress", y: 90 }, { x: "Not Started", y: 70 }] },
+    { id: "Indonesia", data: [{ x: "Critical", y: 25 }, { x: "Pending", y: 80 }, { x: "In-Progress", y: 60 }, { x: "Not Started", y: 20 }] },
+    { id: "Hong Kong", data: [{ x: "Critical", y: 30 }, { x: "Pending", y: 10 }, { x: "In-Progress", y: 50 }, { x: "Not Started", y: 45 }] },
+    { id: "Philippines", data: [{ x: "Critical", y: 90 }, { x: "Pending", y: 80 }, { x: "In-Progress", y: 100 }, { x: "Not Started", y: 70 }] },
 ];
 
 const Heatmap = () => (
@@ -47,7 +15,7 @@ const Heatmap = () => (
             data={data}
             keys={['Critical', 'Pending', 'In-Progress', 'Not Started']}
             indexBy="id"
-            margin={{ top: 40, right: 40, bottom: 80, left: 80 }}
+            margin={{ top: 60, right: 40, bottom: 80, left: 100 }}
             colors={{ type: 'sequential', scheme: 'blues' }}
             axisTop={{
                 orient: 'top',
@@ -56,8 +24,7 @@ const Heatmap = () => (
                 tickRotation: 0,
                 legend: '',
                 legendOffset: 36,
-                tickColor: '#333',
-                tickTextColor: '#333'
+                tickTextStyle: { fontSize: 'calc(1vw + 1vh)' }, // Adjust font size here
             }}
             axisRight={null}
             axisLeft={{
@@ -67,8 +34,7 @@ const Heatmap = () => (
                 tickRotation: 0,
                 legend: '',
                 legendOffset: -60,
-                tickColor: '#333',
-                tickTextColor: '#333'
+                tickTextStyle: { fontSize: 'calc(1vw + 1vh)' }, // Adjust font size here
             }}
             cellOpacity={1}
             cellBorderColor={{ from: 'color', modifiers: [['darker', 0.4]] }}
@@ -90,10 +56,8 @@ const Heatmap = () => (
                     symbolSize: 20,
                     legendPosition: 'middle',
                     legendOffset: 0,
-                    color: {
-                        type: 'sequential',
-                        scheme: 'blues',
-                    }
+                    color: { type: 'sequential', scheme: 'blues' },
+                    textStyle: { fontSize: 'calc(1vw + 1vh)' } // Adjust font size here
                 }
             ]}
         />
