@@ -4,18 +4,18 @@
     box-sizing: border-box;
     padding: 10px;
     position: relative;
-    overflow: auto;
-    /* Ensure content is scrollable if it overflows */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent overflow within the container */
 }
 
 .market-table {
     width: 100%;
-    height: auto;
+    height: 100%;
     text-align: center;
     border-collapse: collapse;
     font-size: 0.9rem;
-    overflow-x: auto;
-    /* Enable horizontal scrolling if needed */
+    table-layout: fixed; /* Ensure table respects container width */
 }
 
 .market-table-header {
@@ -29,6 +29,8 @@
 .market-table-cell {
     padding: 5px;
     white-space: nowrap;
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
 }
 
 .market-table-cell-market {
