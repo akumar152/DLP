@@ -1,0 +1,50 @@
+/* Heatmap.css */
+.heatmap-container {
+    width: 100%;
+    height: 100%;
+    max-height: calc(100vh - 60px);
+    /* Adjust based on grid layout padding and margins */
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .heatmap-container {
+        max-height: calc(100vh - 80px);
+        /* Further reduce height on smaller screens */
+    }
+
+    .nivo-heatmap .nivo-axis__x text,
+    .nivo-heatmap .nivo-axis__y text {
+        font-size: 12px;
+        /* Adjust font size for x and y axis labels */
+    }
+
+    .nivo-heatmap .nivo-legends text {
+        font-size: 12px;
+        /* Adjust font size for legend text */
+    }
+}
+
+@media (max-width: 480px) {
+    .heatmap-container {
+        max-height: calc(100vh - 100px);
+        /* Adjust further for very small screens */
+    }
+
+    .nivo-heatmap .nivo-axis__x text,
+    .nivo-heatmap .nivo-axis__y text {
+        font-size: 10px;
+        /* Even smaller font size for very small screens */
+    }
+
+    .nivo-heatmap .nivo-legends text {
+        font-size: 10px;
+        /* Adjust font size for legend text */
+    }
+}
