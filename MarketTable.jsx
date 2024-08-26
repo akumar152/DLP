@@ -33,8 +33,8 @@ const MarketTable = () => {
     };
 
     return (
-        <div style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '20px' }}>
-            <table border="1" style={{ width: '100%', height: 'auto', textAlign: 'center', borderCollapse: 'collapse', fontSize: '1em' }}>
+        <div style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '10px' }}>
+            <table border="1" style={{ width: '100%', height: 'auto', textAlign: 'center', borderCollapse: 'collapse', fontSize: '0.9em' }}>
                 <thead>
                     <tr>
                         <th style={{ backgroundColor: 'pink', color: 'black', padding: '5px' }}>Market</th>
@@ -94,7 +94,7 @@ const MarketTable = () => {
             </table>
 
             {/* Horizontal Color Legend */}
-            <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', fontSize: '0.9em' }}>
+            <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', fontSize: '0.8em' }}>
                 {Object.keys(value).map((key) => (
                     <div
                         key={key}
@@ -131,8 +131,10 @@ const MarketTable = () => {
                         zIndex: 1000,
                         pointerEvents: 'none',
                         fontSize: '0.9em',
-                        maxWidth: '200px',
-                        wordWrap: 'break-word'
+                        maxWidth: '150px',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
                     }}
                 >
                     {tooltip.content}
