@@ -1,36 +1,41 @@
 .market-table-container {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    position: relative;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Prevent overflow within the container */
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* Prevent overflow of the container */
 }
 
 .market-table {
     width: 100%;
     height: 100%;
-    text-align: center;
+    max-height: calc(100% - 40px);
+    /* Adjust based on the padding and any potential header */
     border-collapse: collapse;
     font-size: 0.9rem;
-    table-layout: fixed; /* Ensure table respects container width */
+    overflow: auto;
+    /* Allow scrolling within the table if content exceeds its bounds */
+    table-layout: fixed;
+    /* Ensure table columns resize properly */
 }
 
 .market-table-header {
     background-color: pink;
     color: black;
     padding: 5px;
-    white-space: nowrap;
     font-size: 0.9rem;
 }
 
 .market-table-cell {
     padding: 5px;
     white-space: nowrap;
-    overflow: hidden; /* Prevent text overflow */
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    overflow: hidden;
+    /* Prevent overflow within cells */
+    text-overflow: ellipsis;
+    /* Add ellipsis for overflow text */
 }
 
 .market-table-cell-market {
