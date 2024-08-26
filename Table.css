@@ -1,46 +1,69 @@
 .table-container {
     padding: 20px;
-    overflow-x: auto;
-    margin: 0;
-    /* Removed negative margins */
+    overflow-x: auto; /* Allows horizontal scrolling on smaller screens */
+    margin: 0; /* Ensure margins are consistent */
 }
 
 .responsive-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-    /* Ensures columns take equal width */
+    width: 100%; /* Ensure the table uses the full width of the container */
+    border-collapse: collapse; /* Collapse borders for cleaner look */
+    table-layout: auto; /* Allows table layout to adjust based on content */
 }
 
-.header-row,
-.body-row {
+.header-row {
     background-color: #f4f4f4;
 }
 
-.header-cell,
+.header-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 1rem; /* Use relative units for responsive font size */
+    font-weight: bold; /* Optional: make header text bold */
+}
+
+.body-row {
+    background-color: #fff;
+}
+
 .body-cell {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-size: 0.875rem; /* Use relative units for responsive font size */
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-
-    .header-cell,
+@media (max-width: 1024px) {
+    .header-cell {
+        font-size: 0.875rem; /* Slightly smaller font size for medium screens */
+    }
+    
     .body-cell {
-        padding: 4px;
-        /* Adjust padding for smaller screens */
-        font-size: 12px;
-        /* Adjust font size for smaller screens */
+        font-size: 0.75rem; /* Slightly smaller font size for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .header-cell {
+        font-size: 0.75rem; /* Further reduce font size for smaller screens */
+        padding: 6px; /* Reduce padding for smaller screens */
+    }
+    
+    .body-cell {
+        font-size: 0.6875rem; /* Further reduce font size for smaller screens */
+        padding: 4px; /* Reduce padding for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
-
-    .header-cell,
+    .header-cell {
+        font-size: 0.6875rem; /* Further reduce font size for very small screens */
+        padding: 4px; /* Reduce padding for very small screens */
+    }
+    
     .body-cell {
-        font-size: 10px;
-        /* Further reduce font size for very small screens */
+        font-size: 0.625rem; /* Further reduce font size for very small screens */
+        padding: 2px; /* Reduce padding for very small screens */
     }
 }
