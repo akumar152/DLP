@@ -10,23 +10,25 @@
     overflow: hidden;
 }
 
+/* Ensure heatmap scales properly */
 .nivo-heatmap {
     width: 100%;
     height: 100%;
 }
 
+/* Smaller font size for x and y axis labels */
 .nivo-axis__x text,
 .nivo-axis__y text {
     font-size: calc(1vw + 1vh);
-    /* Font size adjusts based on viewport size */
+    /* Responsive font size */
 }
 
 .nivo-legends text {
     font-size: calc(1vw + 1vh);
-    /* Font size for legend adjusts based on viewport size */
+    /* Responsive font size */
 }
 
-/* Media queries for further fine-tuning on different devices */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 1024px) {
     .heatmap-container {
         padding: 5px;
