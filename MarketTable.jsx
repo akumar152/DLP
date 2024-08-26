@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './MarketTable.css'; // Import the CSS file
+import './MarketTable.css'; // Import the updated CSS file
 
 const value = {
     'Not Started': 'lightgray',
@@ -38,40 +38,56 @@ const MarketTable = () => {
             <table className="market-table">
                 <thead>
                     <tr>
-                        {['Market', 'Bronze', 'Bronze (Target)', 'Silver', 'Silver (Target)', 'Gold', 'Gold (Target)'].map((header, index) => (
-                            <th key={index} className="market-table-header">
-                                {header}
-                            </th>
-                        ))}
+                        <th className="market-table-header">Market</th>
+                        <th className="market-table-header">Bronze</th>
+                        <th className="market-table-header">Bronze (Target)</th>
+                        <th className="market-table-header">Silver</th>
+                        <th className="market-table-header">Silver (Target)</th>
+                        <th className="market-table-header">Gold</th>
+                        <th className="market-table-header">Gold (Target)</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((row, index) => (
                         <tr key={index}>
-                            <td className={`market-table-cell market-table-cell-market ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                            <td
+                                className={`market-table-cell market-table-cell-market ${index % 2 === 0 ? 'odd' : ''}`}
+                            >
                                 {row.market}
                             </td>
-                            <td className="market-table-cell" style={{ backgroundColor: value[row.bronze] }}
+                            <td
+                                className="market-table-cell"
+                                style={{ backgroundColor: value[row.bronze] }}
                                 onMouseEnter={(e) => showTooltip(row.bronze, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td className="market-table-cell" style={{ backgroundColor: value[row.bronzeTarget] }}
+                            <td
+                                className="market-table-cell"
+                                style={{ backgroundColor: value[row.bronzeTarget] }}
                                 onMouseEnter={(e) => showTooltip(row.bronzeTarget, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td className="market-table-cell" style={{ backgroundColor: value[row.silver] }}
+                            <td
+                                className="market-table-cell"
+                                style={{ backgroundColor: value[row.silver] }}
                                 onMouseEnter={(e) => showTooltip(row.silver, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td className="market-table-cell" style={{ backgroundColor: value[row.silverTarget] }}
+                            <td
+                                className="market-table-cell"
+                                style={{ backgroundColor: value[row.silverTarget] }}
                                 onMouseEnter={(e) => showTooltip(row.silverTarget, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td className="market-table-cell" style={{ backgroundColor: value[row.gold] }}
+                            <td
+                                className="market-table-cell"
+                                style={{ backgroundColor: value[row.gold] }}
                                 onMouseEnter={(e) => showTooltip(row.gold, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
-                            <td className="market-table-cell" style={{ backgroundColor: value[row.goldTarget] }}
+                            <td
+                                className="market-table-cell"
+                                style={{ backgroundColor: value[row.goldTarget] }}
                                 onMouseEnter={(e) => showTooltip(row.goldTarget, e)}
                                 onMouseLeave={hideTooltip}
                             ></td>
@@ -83,15 +99,24 @@ const MarketTable = () => {
             {/* Horizontal Color Legend */}
             <div className="market-table-legend">
                 {Object.keys(value).map((key) => (
-                    <div key={key} className="market-table-legend-item">
-                        <div className="legend-color-box" style={{ backgroundColor: value[key] }}></div>
+                    <div
+                        key={key}
+                        className="market-table-legend-item"
+                    >
+                        <div
+                            className="legend-color-box"
+                            style={{ backgroundColor: value[key] }}
+                        ></div>
                         <span>{key}</span>
                     </div>
                 ))}
             </div>
 
             {tooltip.visible && (
-                <div className="market-table-tooltip" style={{ top: tooltip.y + 10, left: tooltip.x + 10 }}>
+                <div
+                    className="market-table-tooltip"
+                    style={{ top: tooltip.y + 10, left: tooltip.x + 10 }}
+                >
                     {tooltip.content}
                 </div>
             )}
