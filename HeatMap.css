@@ -15,18 +15,32 @@
     height: 100%;
 }
 
+/* Responsive font sizes for axis labels and values */
+.nivo-axis__x text,
+.nivo-axis__y text {
+    font-size: calc(0.5vw + 0.5em);
+    /* Responsive font size */
+}
+
+/* Responsive font size for legend text */
+.nivo-legends text {
+    font-size: calc(0.5vw + 0.5em);
+    /* Responsive font size */
+}
+
+/* Responsive padding and legend color adjustments */
 @media (max-width: 1024px) {
     .heatmap-container {
         padding: 5px;
     }
 
-    .nivo-heatmap .nivo-axis__x text,
-    .nivo-heatmap .nivo-axis__y text {
+    .nivo-axis__x text,
+    .nivo-axis__y text {
         font-size: 12px;
         /* Adjust font size for x and y axis labels */
     }
 
-    .nivo-heatmap .nivo-legends text {
+    .nivo-legends text {
         font-size: 12px;
         /* Adjust font size for legend text */
     }
@@ -37,13 +51,13 @@
         padding: 5px;
     }
 
-    .nivo-heatmap .nivo-axis__x text,
-    .nivo-heatmap .nivo-axis__y text {
+    .nivo-axis__x text,
+    .nivo-axis__y text {
         font-size: 10px;
         /* Further reduce font size for smaller screens */
     }
 
-    .nivo-heatmap .nivo-legends text {
+    .nivo-legends text {
         font-size: 10px;
         /* Further reduce font size for legend text */
     }
@@ -54,13 +68,13 @@
         padding: 2px;
     }
 
-    .nivo-heatmap .nivo-axis__x text,
-    .nivo-heatmap .nivo-axis__y text {
+    .nivo-axis__x text,
+    .nivo-axis__y text {
         font-size: 8px;
         /* Reduce font size for very small screens */
     }
 
-    .nivo-heatmap .nivo-legends text {
+    .nivo-legends text {
         font-size: 8px;
         /* Reduce font size for legend text */
     }
