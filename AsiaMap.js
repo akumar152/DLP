@@ -152,7 +152,7 @@ const AsiaMap = () => {
                             className="legend-color-box"
                             style={{
                                 backgroundColor: marketColors[market],
-                                width: `${Math.max(getLegendItemWidth(market),50)}px`,
+                                width: `${Math.max(getLegendItemWidth(market), 50)}px`,
                                 height: '5px',
                                 borderRadius: '10px',
                                 display: 'flex',
