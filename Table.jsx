@@ -2,7 +2,7 @@ import React from 'react';
 import { useTable } from 'react-table';
 import './Table.css'; // Import your CSS file
 
-// Generate dummy data with 20 rows and 10 columns
+// Generate dummy data with 10 rows and 9 columns
 const generateData = (numRows, numCols) => {
     const data = [];
     for (let i = 0; i < numRows; i++) {
@@ -15,18 +15,22 @@ const generateData = (numRows, numCols) => {
     return data;
 };
 
-// Generate columns based on the number of columns
-const generateColumns = (numCols) => {
-    return Array.from({ length: numCols }, (_, i) => ({
-        Header: `Column ${i + 1}`,
-        accessor: `col${i}`, // Accessor is the key in the data
-    }));
-};
+// Custom column headers
+const columns = [
+    { Header: 'Market', accessor: 'col0' },
+    { Header: 'Domain coverage', accessor: 'col1' },
+    { Header: 'Time coverage', accessor: 'col2' },
+    { Header: 'Volume', accessor: 'col3' },
+    { Header: 'No of tables', accessor: 'col4' },
+    { Header: 'Update frequencies', accessor: 'col5' },
+    { Header: 'Number of issues', accessor: 'col6' },
+    { Header: 'Average Monthly cost', accessor: 'col7' },
+    { Header: 'Data Ingestion Mechanism', accessor: 'col8' },
+];
 
 const numRows = 10;
-const numCols = 10;
+const numCols = columns.length; // Updated to match the number of custom columns
 const data = generateData(numRows, numCols);
-const columns = generateColumns(numCols);
 
 const Table = () => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
