@@ -2,20 +2,41 @@ import React from 'react';
 import { useTable } from 'react-table';
 import './Table.css'; // Import your CSS file
 
-// Generate dummy data with 10 rows and 9 columns
-const generateData = (numRows, numCols) => {
+// Helper functions to generate specific types of data
+const randomBetween = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const randomChoice = (choices) => choices[Math.floor(Math.random() * choices.length)];
+const formatDate = (date) => `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
+
+// Generate a random date range between Jan 2020 and March 2027
+const randomDateRange = (start, end) => {
+    const startDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    const endDate = new Date(startDate.getTime() + Math.random() * (end.getTime() - startDate.getTime()));
+    return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+};
+
+// Generate data with 10 rows based on provided value constraints
+const generateData = (numRows) => {
+    const markets = ['HK', 'ID', 'PH', 'MY'];
+    const ingestionMechanisms = ['CDC', 'Real Time', 'Batch'];
+
     const data = [];
     for (let i = 0; i < numRows; i++) {
-        const row = {};
-        for (let j = 0; j < numCols; j++) {
-            row[`col${j}`] = `Row ${i + 1} - Col ${j + 1}`;
-        }
-        data.push(row);
+        data.push({
+            col0: randomChoice(markets),  // Market
+            col1: 'Claim',  // Domain coverage
+            col2: randomDateRange(new Date(2020, 0, 1), new Date(2027, 2, 31)),  // Time coverage
+            col3: 250.00,  // Volume
+            col4: randomBetween(20, 102),  // No of tables
+            col5: 'Monthly',  // Update frequencies
+            col6: randomBetween(10, 400),  // Number of issues
+            col7: randomBetween(78, 500),  // Average Monthly cost
+            col8: randomChoice(ingestionMechanisms)  // Data Ingestion Mechanism
+        });
     }
     return data;
 };
 
-// Custom column headers
+// Updated column headers
 const columns = [
     { Header: 'Market', accessor: 'col0' },
     { Header: 'Domain coverage', accessor: 'col1' },
@@ -28,9 +49,8 @@ const columns = [
     { Header: 'Data Ingestion Mechanism', accessor: 'col8' },
 ];
 
-const numRows = 10;
-const numCols = columns.length; // Updated to match the number of custom columns
-const data = generateData(numRows, numCols);
+const numRows = 10; // Number of rows to generate
+const data = generateData(numRows);
 
 const Table = () => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
