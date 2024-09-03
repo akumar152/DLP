@@ -6,24 +6,35 @@ const data = [
     {
         country: 'Malaysia',
         active: 13000,
-        inactive: 50,
+        inactive: 5000,
     },
     {
         country: 'Indonesia',
-        active: 200,
-        inactive: 80,
+        active: 20000,
+        inactive: 8000,
     },
     {
         country: 'Hong Kong',
-        active: 150,
-        inactive: 60,
+        active: 15000,
+        inactive: 6000,
     },
     {
         country: 'Philippines',
-        active: 90,
-        inactive: 40,
+        active: 9000,
+        inactive: 4000,
     },
 ];
+
+// Function to format numbers
+const formatNumber = (num) => {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1) + 'M';
+    } else if (num >= 1000) {
+        return (num / 1000).toFixed(1) + 'k';
+    } else {
+        return num.toString();
+    }
+};
 
 const BarChart = () => {
     const containerRef = useRef(null);
@@ -67,8 +78,9 @@ const BarChart = () => {
                         legendPosition: 'middle',
                         legendOffset: -40,
                         tickValues: tickValues,
+                        format: formatNumber, // Apply the number formatting to the axis ticks
                     }}
-                    label={d => `$${d.value}`} // Display the cost on the bar
+                    label={d => formatNumber(d.value)} // Format the label text on the bar
                     labelSkipWidth={12}
                     labelSkipHeight={12}
                     labelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
@@ -82,7 +94,7 @@ const BarChart = () => {
                             }}
                         >
                             <strong>
-                                {id}: ${value}
+                                {id}: ${formatNumber(value)}
                             </strong>
                         </div>
                     )}
