@@ -11,8 +11,14 @@ const UploadAndRunNotebook = () => {
     const [showModal, setShowModal] = useState(false);
     const [jobData, setJobData] = useState([
         { jobId: 'JOB12345', userId: 'user1', timeTaken: '5m 32s', dateTime: '2024-10-29 14:35:00', clusterId: 'CL123' },
-        { jobId: 'JOB12346', userId: 'user2', timeTaken: '12m 10s', dateTime: '2024-10-29 15:00:00', clusterId: 'CL124' }
+        { jobId: 'JOB12346', userId: 'user2', timeTaken: '12m 10s', dateTime: '2024-10-29 15:00:00', clusterId: 'CL124' },
+        { jobId: 'JOB12347', userId: 'user3', timeTaken: '3m 45s', dateTime: '2024-10-29 15:30:00', clusterId: 'CL125' },
+        { jobId: 'JOB12348', userId: 'user4', timeTaken: '7m 10s', dateTime: '2024-10-29 15:45:00', clusterId: 'CL126' },
+        { jobId: 'JOB12349', userId: 'user5', timeTaken: '4m 20s', dateTime: '2024-10-29 16:00:00', clusterId: 'CL127' },
+        { jobId: 'JOB12350', userId: 'user6', timeTaken: '8m 15s', dateTime: '2024-10-29 16:15:00', clusterId: 'CL128' }
     ]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 3;
 
     const fileTypes = {
         excel: ".xlsx",
@@ -47,10 +53,7 @@ const UploadAndRunNotebook = () => {
             });
 
             setUploadStatus(`File uploaded successfully: ${response.data.file_path}`);
-            console.log("File uploaded successfully:", response.data.file_path);
-
             setShowModal(true);
-            return response.data.file_path;
         } catch (error) {
             console.error("Error uploading file:", error);
             setUploadStatus(`Error: ${error.response ? error.response.data : error.message}`);
@@ -78,7 +81,6 @@ const UploadAndRunNotebook = () => {
                 },
             });
 
-            console.log("Notebook run triggered:", response.data);
             setRunStatus(`Notebook run triggered: ${response.data}`);
             setShowModal(true);
         } catch (error) {
@@ -93,6 +95,12 @@ const UploadAndRunNotebook = () => {
         setUploadStatus('');
         setRunStatus('');
     };
+
+    // Pagination Logic
+    const indexOfLastJob = currentPage * rowsPerPage;
+    const indexOfFirstJob = indexOfLastJob - rowsPerPage;
+    const currentJobs = jobData.slice(indexOfFirstJob, indexOfLastJob);
+    const totalPages = Math.ceil(jobData.length / rowsPerPage);
 
     return (
         <div style={styles.container}>
@@ -160,8 +168,8 @@ const UploadAndRunNotebook = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {jobData.map((job, index) => (
-                            <tr key={index}>
+                        {currentJobs.map((job, index) => (
+                            <tr key={index} style={styles.row}>
                                 <td style={styles.td}>{job.jobId}</td>
                                 <td style={styles.td}>{job.userId}</td>
                                 <td style={styles.td}>{job.timeTaken}</td>
@@ -171,6 +179,25 @@ const UploadAndRunNotebook = () => {
                         ))}
                     </tbody>
                 </table>
+                <div style={styles.pagination}>
+                    <button
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        style={styles.paginationButton}
+                    >
+                        Previous
+                    </button>
+                    <span style={styles.paginationInfo}>
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        style={styles.paginationButton}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
             {/* Modal for displaying status */}
@@ -188,101 +215,111 @@ const UploadAndRunNotebook = () => {
     );
 };
 
-// Inline styles
-// Inline styles
+// Inline styles object
 const styles = {
     container: {
         padding: '20px',
         fontFamily: 'Arial, sans-serif',
-        width: 'calc(100% - 40px)',
+        // maxWidth: '800px',
         margin: '0 auto',
-        marginLeft: '20px',
-        marginRight: '20px',
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#ffffff',
         borderRadius: '8px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 2px 15px rgba(0, 0, 0, 0.1)',
     },
     title: {
         textAlign: 'center',
-        marginBottom: '20px',
         color: '#333',
+        marginBottom: '20px',
     },
     section: {
-        marginTop: '30px',
-        padding: '20px',
-        backgroundColor: '#fff',
+        marginBottom: '20px',
+        padding: '15px',
+        border: '1px solid #e0e0e0',
         borderRadius: '8px',
-        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#f9f9f9',
     },
     subtitle: {
-        fontSize: '18px',
-        marginBottom: '15px',
-        color: '#333',
-        textAlign: 'center',
+        color: '#555',
+        marginBottom: '10px',
     },
     label: {
-        display: 'block',
-        marginBottom: '10px',
-        fontSize: '16px',
-        color: '#555',
+        fontWeight: 'bold',
     },
     select: {
-        padding: '8px',
         width: '100%',
-        fontSize: '16px',
-        marginBottom: '15px',
+        padding: '10px',
+        marginBottom: '10px',
+        border: '1px solid #e0e0e0',
         borderRadius: '4px',
-        border: '1px solid #ccc',
-    },
-    fileInput: {
-        display: 'block',
-        marginBottom: '15px',
-        fontSize: '16px',
-        color: '#555',
-    },
-    uploadButton: {
-        padding: '10px 20px',
-        backgroundColor: '#007BFF',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-        fontSize: '16px',
-        transition: 'background-color 0.3s',
     },
     input: {
         width: '100%',
         padding: '10px',
         marginBottom: '10px',
-        fontSize: '16px',
+        border: '1px solid #e0e0e0',
         borderRadius: '4px',
-        border: '1px solid #ccc',
     },
-    runButton: {
-        padding: '10px 20px',
-        backgroundColor: '#28a745',
-        color: '#fff',
+    fileInput: {
+        width: '100%',
+        padding: '10px',
+        marginBottom: '10px',
+    },
+    uploadButton: {
+        backgroundColor: '#007bff',
+        color: '#ffffff',
         border: 'none',
+        padding: '10px',
         borderRadius: '4px',
         cursor: 'pointer',
-        fontSize: '16px',
+        width: '100%',
+        marginTop: '5px',
+    },
+    runButton: {
+        backgroundColor: '#007bff',
+        color: '#ffffff',
+        border: 'none',
+        padding: '10px',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        width: '100%',
+        marginTop: '5px',
     },
     table: {
         width: '100%',
         borderCollapse: 'collapse',
-        marginTop: '20px',
+        marginTop: '10px',
     },
     th: {
-        borderBottom: '1px solid #ddd',
-        padding: '8px',
+        border: '1px solid #e0e0e0',
+        padding: '10px',
         textAlign: 'left',
-        fontWeight: 'bold',
-        color: '#333',
+        backgroundColor: '#007bff',
+        color: '#ffffff',
     },
     td: {
-        borderBottom: '1px solid #ddd',
-        padding: '8px',
+        border: '1px solid #e0e0e0',
+        padding: '10px',
+        textAlign: 'left',
+    },
+    row: {
+        backgroundColor: '#f9f9f9',
+    },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: '10px',
+    },
+    paginationInfo: {
         color: '#555',
+    },
+    paginationButton: {
+        backgroundColor: '#007bff',
+        color: '#ffffff',
+        border: 'none',
+        padding: '10px',
+        borderRadius: '4px',
+        cursor: 'pointer',
     },
     modalOverlay: {
         position: 'fixed',
@@ -292,27 +329,26 @@ const styles = {
         bottom: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
     },
     modalContent: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         padding: '20px',
         borderRadius: '8px',
+        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
         maxWidth: '400px',
-        textAlign: 'center',
+        width: '100%',
     },
     closeButton: {
-        marginTop: '15px',
-        padding: '8px 16px',
-        fontSize: '14px',
-        color: '#333',
-        backgroundColor: '#eee',
+        backgroundColor: '#007bff',
+        color: '#ffffff',
         border: 'none',
+        padding: '10px',
         borderRadius: '4px',
         cursor: 'pointer',
+        marginTop: '10px',
     },
 };
 
 export default UploadAndRunNotebook;
-
